@@ -6,10 +6,6 @@ function Home() {
  
   return (
     <div>
-
-        <h2 className='lg:font-bold lg:tracking-wide flex justify-center mt-20 lg:pt-20 lg:tracking-widest'>
-          Wellcome to out Users List</h2>
-          <p>Click the Users on menu to see the users</p>
         <Outlet></Outlet>
 
      

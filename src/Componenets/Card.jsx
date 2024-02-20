@@ -11,11 +11,6 @@ function Card({user}){
     <div className="border border-2 border-gray-500 rounded-md ">
   
       <img className='w-1/2 mx-auto my-4' src={user.image} alt="image" />
-      {/* <h2>First Name: {user.firstName}</h2>
-      <h2>Last Name: {user.lastName}</h2>
-      <h3>Email: {user.email}</h3>
-      <h3>Address: {user.address.address}</h3>
-      <h3>Company Name: {user.company.name}</h3> */}
 
       <p> <span className='font-bold'>FirstName: </span>{user.firstName}</p>
       <p><span className='font-bold'>Last Name:</span> {user.lastName}</p>
