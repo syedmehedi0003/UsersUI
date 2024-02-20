@@ -1,4 +1,3 @@
-// import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import { Outlet } from 'react-router-dom'
 
@@ -6,8 +5,9 @@ function Home() {
 
  
   return (
-    <div>This is Home page
-        <Header></Header>
+    <div>
+
+        <h2 className='lg:font-bold lg:tracking-wide flex justify-center mt-20 lg:pt-20'>Wellcome to out Users List</h2>
         <Outlet></Outlet>
 
      

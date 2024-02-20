@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card';
-import './Users.css'
+
 
 
 function Users() {
 
   // Define state for the selected option
   const [selectedValue, setSelectedValue] = useState("");
-  // console.log(selectedOption);
-
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -22,32 +20,6 @@ function Users() {
 
   }, [])
 
-// ______________________------------------------------------
-  // Function to handle changes in the select input
-  // const handleChange = (event) => {
-
-  //   setSelectedOption(event.target.value);
-  //   if (selectedOption ==='') {
-  //     setUsers(users);
-  //     return;
-  //   }
-  //   let sortedData = [...users];
-
-  //   if (selectedOption === "firstName") {
-  //     sortedData.sort((a, b) => a.firstName > b.firstName ? 1 : -1);
-  //   }
-  //   else if (selectedOption === "email") {
-  //     sortedData.sort((a, b) => a.email > b.email ? 1 : -1);
-  //   }
-  //   else if (selectedOption === "company") {
-  //     sortedData.sort((a, b) => a.company.name > b.company.name ? 1 : -1);
-  //   }
-
-  //   setUsers(sortedData);
-
-
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchValue == "") { return users }
@@ -56,8 +28,6 @@ function Users() {
     setUsers(filterSearch)
 
   }
-
-// ------------------------------------------------_________________
 
 
 useEffect(() => {
@@ -82,16 +52,14 @@ useEffect(() => {
   };
 
 
-  // ______________________---------------------
-
+ 
   return (
     <div>
 
-      <select value={selectedValue} onChange={handleChange}>
+      <select className='border-solid border-2 border-black-500 rounded mr-2 p-1 my-2' value={selectedValue} onChange={handleChange}>
         {/* Default option */}
-        <option value="">Select an option</option>
-        {/* Other options */}
-        {/* {options.map(option =>  <option key={option.id} value= {option.value} >{option.text}</option>)} */}
+        <option value="" className='cursor-pointer'>Select an option</option>
+       
         <option value="name">Sort by Name</option>
         <option value="email">Sort by Emial</option>
         <option value="company">Sort by Company</option>
@@ -99,13 +67,11 @@ useEffect(() => {
 
       <form onSubmit={(e) => handleSubmit(e)}>
 
-        <input type="search" onChange={(e) => setSearchValue(e.target.value)} />
+        <input className='border-solid border-2 border-sky-500 rounded mr-2 p-1 lg:w-80' type="search" onChange={(e) => setSearchValue(e.target.value)} />
 
-        <input type="submit" />
+        <input className='font-medium cursor-pointer'  type="submit" />
       </form>
-      <div className="users">
-
-
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 mt-10 place-content-center">
 
 
         {users.map(user =>
