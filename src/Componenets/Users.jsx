@@ -13,12 +13,20 @@ function Users() {
   const [users, setUsers] = useState([]);
   // console.log(users);
 
+   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     fetch('https://dummyjson.com/users')
       .then(res => res.json())
-      .then(data => setUsers(data.users));
+      .then(data => {
+        setLoading(false)
+        setUsers(data.users)
+      } );
 
   }, [])
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +63,12 @@ useEffect(() => {
  
   return (
     <div>
-
+      {
+        loading?
+         <div>
+        <p>Loading.....</p>
+      </div>:
+      <>
       <select className='border-solid border-2 border-black-500 rounded mr-2 p-1 my-2' value={selectedValue} onChange={handleChange}>
         {/* Default option */}
         <option value="" className='cursor-pointer'>Select an option</option>
@@ -77,6 +90,11 @@ useEffect(() => {
         {users.map(user =>
           <Card key={user.id} user={user}></Card>)}
       </div>
+      </>
+      }
+     
+      
+      
     </div>
   )
 }
