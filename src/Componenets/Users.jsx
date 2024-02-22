@@ -13,7 +13,7 @@ function Users() {
   const [users, setUsers] = useState([]);
   // console.log(users);
 
-   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -22,7 +22,7 @@ function Users() {
       .then(data => {
         setLoading(false)
         setUsers(data.users)
-      } );
+      });
 
   }, [])
 
@@ -38,7 +38,7 @@ function Users() {
   }
 
 
-useEffect(() => {
+  useEffect(() => {
     let sortedData = [...users]; // Initialize sortedData with a copy of the original users array
 
     if (selectedValue === "name") {
@@ -53,48 +53,52 @@ useEffect(() => {
 
     // Update the state with the sorted data
     setUsers(sortedData);
-  }, [selectedValue]); 
-  
+  }, [selectedValue]);
+
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
 
- 
+
   return (
-    <div>
+    <div className='p-2'>
       {
-        loading?
-         <div>
-        <p>Loading.....</p>
-      </div>:
-      <>
-      <select className='border-solid border-2 border-black-500 rounded mr-2 p-1 my-2' value={selectedValue} onChange={handleChange}>
-        {/* Default option */}
-        <option value="" className='cursor-pointer'>Select an option</option>
-       
-        <option value="name">Sort by Name</option>
-        <option value="email">Sort by Emial</option>
-        <option value="company">Sort by Company</option>
-      </select>
+        loading ?
+          <div>
+            <p>Loading.....</p>
+          </div> :
+          <>
+            <div className='lg:flex lg:justify-between'>
+              <div> <select className='border-solid border-2 border-sky-500 rounded mr-2 p-1 my-2' value={selectedValue} onChange={handleChange}>
+                {/* Default option */}
+                <option value="" className='cursor-pointer'>Select an option</option>
 
-      <form onSubmit={(e) => handleSubmit(e)}>
+                <option value="name">Sort by Name</option>
+                <option value="email">Sort by Emial</option>
+                <option value="company">Sort by Company</option>
+              </select></div>
 
-        <input className='border-solid border-2 border-sky-500 rounded mr-2 p-1 lg:w-80' type="search" onChange={(e) => setSearchValue(e.target.value)} />
+              <div>
+                <form onSubmit={(e) => handleSubmit(e)} className='p-1'>
 
-        <input className='font-medium cursor-pointer'  type="submit" />
-      </form>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 mt-10 place-content-center">
+                  <input className='border-solid border-2 border-sky-500 rounded mr-2 p-1 lg:w-80' placeholder="Search" type="search" onChange={(e) => setSearchValue(e.target.value)} />
+
+                  <input className='font-medium cursor-pointer bg-sky-500 rounded mr-2 p-1 text-white' type="submit" />
+                </form>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 mt-10 place-content-center">
 
 
-        {users.map(user =>
-          <Card key={user.id} user={user}></Card>)}
-      </div>
-      </>
+              {users.map(user =>
+                <Card key={user.id} user={user}></Card>)}
+            </div>
+          </>
       }
-     
-      
-      
+
+
     </div>
   )
 }
