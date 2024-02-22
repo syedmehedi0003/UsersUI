@@ -95,7 +95,7 @@ function Users() {
               <div>
                 <form onSubmit={(e) => handleSubmit(e)} className='p-1'>
 
-                  <input className='border-solid border-2 border-sky-500 rounded mr-2 p-1 lg:w-80' placeholder="Search"
+                  <input className='border-solid border-2 border-sky-500 rounded mr-2 p-1 lg:w-80' placeholder=" Search "
                     type="search" value={searchValue}
                 onChange={handleSearch} />
 
@@ -103,7 +103,7 @@ function Users() {
                 </form>
               </div>
 
-              <div> <select className='border-solid border-2 border-sky-500 rounded mr-2 p-1 my-2' value={selectedValue} onChange={handleChange}>
+              <div> <select className='border-solid border-2 border-sky-500 rounded mr-2 p-1 my-2 lg:w-80' value={selectedValue} onChange={handleChange}>
                 {/* Default option */}
                 <option value="" className='cursor-pointer'>Select an option</option>
 
