@@ -70,15 +70,7 @@ function Users() {
           </div> :
           <>
             <div className='lg:flex lg:justify-between'>
-              <div> <select className='border-solid border-2 border-sky-500 rounded mr-2 p-1 my-2' value={selectedValue} onChange={handleChange}>
-                {/* Default option */}
-                <option value="" className='cursor-pointer'>Select an option</option>
-
-                <option value="name">Sort by Name</option>
-                <option value="email">Sort by Emial</option>
-                <option value="company">Sort by Company</option>
-              </select></div>
-
+              
               <div>
                 <form onSubmit={(e) => handleSubmit(e)} className='p-1'>
 
@@ -87,6 +79,16 @@ function Users() {
                   <input className='font-medium cursor-pointer bg-sky-500 rounded mr-2 p-1 text-white' type="submit" />
                 </form>
               </div>
+
+              <div> <select className='border-solid border-2 border-sky-500 rounded mr-2 p-1 my-2' value={selectedValue} onChange={handleChange}>
+                {/* Default option */}
+                <option value="" className='cursor-pointer'>Select an option</option>
+
+                <option value="name">Sort by Name</option>
+                <option value="email">Sort by Emial</option>
+                <option value="company">Sort by Company</option>
+              </select></div>
+              
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 mt-10 place-content-center">
