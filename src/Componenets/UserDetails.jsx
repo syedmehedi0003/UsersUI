@@ -17,7 +17,7 @@ function UserDetails() {
   console.log(userData);
 
   return (
-    <div>
+    <div className='h-screen'>
       <img className='w-1/6 mx-auto my-4' src={userData.image} alt="image" />
       <p> <span className='font-bold'>FirstName: </span>{userData.firstName}</p>
       <p><span className='font-bold'>Last Name:</span> {userData.lastName}</p>

@@ -11,6 +11,12 @@ function Users() {
   const [searchValue, setSearchValue] = useState("");
 
   const [users, setUsers] = useState([]);
+
+
+  const [originalUsers, setOriginalUsers] = useState([]);
+
+  const [searchMessage, setSearchMessage] = useState("");
+
   // console.log(users);
 
   const [loading, setLoading] = useState(false);
@@ -18,24 +24,39 @@ function Users() {
   useEffect(() => {
     setLoading(true);
     fetch('https://dummyjson.com/users')
-      .then(res => res.json())
-      .then(data => {
-        setLoading(false)
-        setUsers(data.users)
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(false);
+        setUsers(data.users);
+        setOriginalUsers(data.users);
       });
 
   }, [])
 
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (searchValue == "") { return users }
+  const handleSearch = (e) => {
+    const { value } = e.target;
+    setSearchValue(value);
 
-    const filterSearch = users.filter((user) => user.firstName.toLowerCase().includes(searchValue.toLowerCase()))
-    setUsers(filterSearch)
+    if (value === "") {
+      setUsers(originalUsers);
+      setSearchMessage("");
+    } else {
+      const filterSearch = originalUsers.filter((user) =>
+        user.firstName.toLowerCase().includes(value.toLowerCase())
+      );
 
-  }
+      setUsers(filterSearch);
+
+      // Set search message if no matches found
+      if (filterSearch.length === 0) {
+        setSearchMessage("Sorry, No matching users found.");
+      } else {
+        setSearchMessage("");
+      }
+    }
+  };
 
 
   useEffect(() => {
@@ -70,13 +91,15 @@ function Users() {
           </div> :
           <>
             <div className='lg:flex lg:justify-between'>
-              
+
               <div>
                 <form onSubmit={(e) => handleSubmit(e)} className='p-1'>
 
-                  <input className='border-solid border-2 border-sky-500 rounded mr-2 p-1 lg:w-80' placeholder="Search" type="search" onChange={(e) => setSearchValue(e.target.value)} />
+                  <input className='border-solid border-2 border-sky-500 rounded mr-2 p-1 lg:w-80' placeholder="Search"
+                    type="search" value={searchValue}
+                onChange={handleSearch} />
 
-                  <input className='font-medium cursor-pointer bg-sky-500 rounded mr-2 p-1 text-white' type="submit" />
+                
                 </form>
               </div>
 
@@ -88,11 +111,11 @@ function Users() {
                 <option value="email">Sort by Emial</option>
                 <option value="company">Sort by Company</option>
               </select></div>
-              
+
             </div>
-
+            {searchMessage.length > 0 && <p className='text-red-500 font-bold'>{searchMessage}</p>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 mt-10 place-content-center">
-
+         
 
               {users.map(user =>
                 <Card key={user.id} user={user}></Card>)}
